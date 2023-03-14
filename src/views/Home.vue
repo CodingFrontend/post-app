@@ -14,12 +14,14 @@
 
     <div class="posts__list">
       <virtual-list
+        v-if="filteredList.length"
         :page-mode="true"
         :item-class="'post-wrapper'"
         :data-key="'id'"
         :data-sources="filteredList"
         :data-component="postComponent"
       />
+      <p class="posts__empty" v-else>No posts found</p>
     </div>
   </div>
 </template>
@@ -75,10 +77,6 @@ export default {
     onAddPost() {
       this.addPost();
     },
-
-    searchPost(value) {
-      this.filterList(value);
-    },
   },
 
   created() {
@@ -97,6 +95,10 @@ export default {
   margin: 0 auto;
 }
 
+.posts__list {
+  width: 100%;
+}
+
 .posts__title {
   margin-bottom: 30px;
 }
@@ -112,6 +114,11 @@ export default {
 
 .posts__search {
   margin-bottom: 25px;
+}
+
+.posts__empty {
+  text-align: center;
+  color: gray;
 }
 
 .post-wrapper {
